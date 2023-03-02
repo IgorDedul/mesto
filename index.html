@@ -7,6 +7,7 @@
     <meta name="description" content="Яндекс Практикум. Проектная работа спринта №4. Mesto.">
     <meta name="author" content="Дедуль Игорь">
     <meta name="keywords" content="Яндекс Практикум, проектная работа, спринт №4, Mesto, html, css, адаптивная верстка, БЭМ, JavaScript, DOM">
+    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
 <body class="root">
@@ -14,7 +15,27 @@
         <header class="header">
             <img src="./images/header-logo.svg" alt="Логотип - надпись Mesto" class="header__logo">
         </header>
-
+        <main>
+            <section class="profile">
+              <div class="profile__container">
+                <button class="profile__avatar-edit-button" type="button"><img src='./images/img-profile-avatar.jpg'>" alt="Аватар для профайла" class="profile__avatar"></button>
+                <div class="profile__describe">
+                  <div class="profile__title-wrapper">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button" type="button"></button>
+                  </div>
+                  <p class="profile__subtitle">Исследователь океана</p>
+                </div>
+              </div>
+              <button class="profile__add-button" type="button"></button>
+            </section>
+            <section class="element">
+              <ul class="element__list"></ul>
+            </section>
+          </main>
+          <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+          </footer>
    </div> 
 </body>
 </html>
