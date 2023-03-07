@@ -1,17 +1,10 @@
 .element {
-    margin: 36px auto 0;
-    max-width: 282px;
+  margin: 0 auto;
+  width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 361px;
+  position: relative;
   }
   
-  @media screen and (min-width: 768px) {
-    .element {
-      margin: 50px auto 0;
-      max-width: 581px;
-    }
-  }
-  
-  @media screen and (min-width: 1024px) {
-    .element {
-      max-width: 880px;
-    }
-  }
