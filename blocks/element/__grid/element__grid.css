@@ -1,14 +1,14 @@
 .element__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 282px);
-    margin: 0 auto;
     padding: 76px 200px;
+    margin: 0 auto;
     list-style: none;
-    gap: 20px 17px;
+    gap: 20px 17px; 
   }
-
-  @media screen and (max-width: 767px) {
-    .photo-grid {
+    
+  @media screen and (min-width: 768px) {
+    .element-grid {
       grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
       gap: 12px;
       max-width: 320px;
@@ -16,3 +16,4 @@
       padding: 64px 16px;
     }
   }
+  
