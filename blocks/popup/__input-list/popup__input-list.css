@@ -3,11 +3,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 50px auto 45px;
+  margin: 75px 22px 45px;
 }
 
 @media screen and (min-width: 768px) {
   .popup__input-list {
-    margin: 54px auto 48px;
+    margin: 54px 36px 48px;
   }
 }

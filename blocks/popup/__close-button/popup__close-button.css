@@ -1,7 +1,7 @@
 .popup__close-button {
-    position: inherit;
+    position: absolute;
     top: -36px;
-    right: 8px;
+    right: 0;
     padding: 0;
     margin: 0;
     border: none;

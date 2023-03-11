@@ -1,7 +1,7 @@
 .element {
     display: grid;
     grid-template-columns: repeat(auto-fit, 282px);
-    padding: 76px 200px;
+    padding: 47.25px 200px 0;
     margin: 0 auto;
     list-style: none;
     gap: 20px 17px; 
@@ -13,7 +13,7 @@
       gap: 12px;
       max-width: 320px;
       min-width: 288px;
-      padding: 64px 16px;
+      padding: 36px 19px 0;
     }
   }
   
