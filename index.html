@@ -30,48 +30,19 @@
               <button class="profile__add-button" type="button" aria-label="Добавить профиль"></button>
             </section>
             <section class="element">
-              <div class="element__card">
-                <img src="./images/1.jpg" alt="Эфелева башня" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Париж</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
-              <div class="element__card">
-                <img src="./images/2.jpg" alt="Администрация Будапешта" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Будапешт</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
-              <div class="element__card">
-                <img src="./images/3.jpg" alt="Флаги Евросоюза возле административного здания" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Брюссель</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
-              <div class="element__card">
-                <img src="./images/4.jpg" alt="Улица Амстердама" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Амстердам</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
-              <div class="element__card">
-                <img src="./images/5.jpg" alt="Отели на берегу Салоу" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Барселона</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
-              <div class="element__card">
-                <img src="./images/6.jpg" alt="Вид на старый город Вероны" class="element__image">
-                <div class="element__border"> 
-                  <h2 class="element__name">Верона</h2>
-                  <button class="element__like" type="button" aria-label="Нравится"></button>
-                </div>
-              </div>
+              <ul class="element__list"></ul>
+              <template class="element__template">
+                <li class="element__item">
+                  <div class="element__card">
+                    <button class="element__delete-button" type="button" aria-label="Удалить"></button>
+                    <img src="" alt="" class="element__image">
+                    <div class="element__border"> 
+                      <h2 class="element__name"></h2>
+                      <button class="element__like" type="button" aria-label="Нравится"></button>
+                    </div>
+                  </div>
+                </li>
+              </template>
             </section>
         </main>
           <footer class="footer">
@@ -100,7 +71,7 @@
       <button class="popup__close-button popup__close-add-button" type="button" aria-label="Закрыть"></button>
       <div class="popup__content">
         <h3 class="popup__title">Новое место</h3>
-        <form name="popup-element-form" class="popup__input-list" novalidate>
+        <form name="popup-element-form" class="popup__input-list popup__element-list" novalidate>
           <label class="popup__field">
             <input id="place-input" name="name" class="popup__input" type="text" placeholder="Название"/>
           </label>
@@ -109,6 +80,15 @@
           </label>
           <button class="popup__save-button" type="submit" aria-label="Создать">Создать</button>
         </form>
+      </div>
+    </div>
+  </section>
+  <section class="popup popup_image">
+    <div class="popup__content-image">
+      <button type="button" class="popup__close-button popup__close-image-button"></button>
+      <div>
+        <img src="#" alt="" class="popup__link-image">
+        <h2 class="popup__name-image"></h2>
       </div>
     </div>
   </section>
