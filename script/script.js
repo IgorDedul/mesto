@@ -1,6 +1,6 @@
 const popupElement = document.querySelector('.popup');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-const popupAddElement = document.querySelector('.popup__add-element');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
+const popupAddElement = document.querySelector('.popup_add-element');
 const popupShowElement = document.querySelector('.popup_image');
 
 const popupCloseElement = document.querySelector('.popup__close-button');
