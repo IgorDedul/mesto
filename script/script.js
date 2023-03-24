@@ -63,7 +63,8 @@ function getAddElement() {
     const htmlElement = template.cloneNode(true);
     htmlElement.querySelector('.element__name').textContent = placeElement.value;
     htmlElement.querySelector('.element__image').src = urlElement.value;
-    list.prepend(htmlElement);    
+    list.prepend(htmlElement);
+    debugger; /**Прошу помощи: не понимаю, почему элемент слетает после появления**/   
 };
 
 function setEventListener(htmlElement) {
