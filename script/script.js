@@ -21,50 +21,33 @@ const newElementButton = document.querySelector('.popup__element-list');
 const template = document.querySelector('.element__template').content;
 const list = document.querySelector('.element__list');
 
+const linkImage = document.querySelector('.popup__link-image');
+const altImage = document.querySelector('.popup__link-image');
+const nameImage = document.querySelector('.popup__name-image');
 
-const initialCards = [
-    {
-      name: 'Париж',
-      link: './images/1.jpg'
-    },
-    {
-      name: 'Будапешт',
-      link: './images/2.jpg'
-    },
-    {
-      name: 'Брюссель',
-      link: './images/3.jpg'
-    },
-    {
-      name: 'Амстердам',
-      link: './images/4.jpg'
-    },
-    {
-      name: 'Барселона',
-      link: './images/5.jpg'
-    },
-    {
-      name: 'Верона',
-      link: './images/6.jpg'
-    }
-  ]; 
 
-initialCards.forEach(renderElement);  
+initialCards.forEach(addTemplateCard);  
 
-function renderElement (initialCards) {
-    const htmlElement = template.cloneNode(true);
+function createCard (initialCards) {
+    const htmlElement = template.querySelector('.element__item').cloneNode(true);
     htmlElement.querySelector('.element__name').textContent = initialCards.name;
     htmlElement.querySelector('.element__image').src = initialCards.link;
+    htmlElement.querySelector('.element__image').alt = initialCards.name;
     setEventListener(htmlElement);
-    list.append(htmlElement);
+    return htmlElement;
 };
 
-function getAddElement() {
-    const htmlElement = template.cloneNode(true);
-    htmlElement.querySelector('.element__name').textContent = placeElement.value;
-    htmlElement.querySelector('.element__image').src = urlElement.value;
-    list.prepend(htmlElement);
-    debugger; /**Прошу помощи: не понимаю, почему элемент слетает после появления**/   
+function addTemplateCard(initialCards) {
+  const cardClone = createCard(initialCards);
+  list.prepend(cardClone);
+};
+
+function getAddElement(event) {
+    event.preventDefault();
+    const cardName = placeElement.value;
+    const cardLink = urlElement.value;
+    addTemplateCard({name: cardName, link: cardLink});
+    closePopup(popupAddElement);
 };
 
 function setEventListener(htmlElement) {
@@ -88,59 +71,53 @@ function openPopupShow(event) {
     const searchNameElement = event.target.closest('.element__card');
     const nameElement = searchNameElement.querySelector('.element__name');
 
-    document.querySelector('.popup__link-image').src = img.src;
-    document.querySelector('.popup__name-image').textContent = nameElement.textContent;
+    linkImage.src = img.src;
+    nameImage.textContent = nameElement.textContent;
+    altImage.textContent = nameElement.textContent;
 
-    popupShowElement.classList.add('popup_opened');
-    popupCloseImage.addEventListener('click', popupCloseImageShow);
+    openPopup(popupShowElement);
 }
 
-function popupCloseImageShow() {
-    popupShowElement.classList.remove('popup_opened');
-};
-
-function popupWriteStartedForm() {
+function writePopupStartedForm() {
     userNameInput.value = userName.textContent;
     userAboutInput.value = userAbout.textContent;
 };
 
-function popupOpenProfileEdit() {
-    popupEditProfile.classList.add('popup_opened');
-    popupWriteStartedForm();
+function openPopupProfileEdit() {
+    openPopup(popupEditProfile);
+    writePopupStartedForm();
 };
 
-function popupCloseProfileEdit() {
-    popupEditProfile.classList.remove('popup_opened');
-};
-
-function popupCloseProfileEditOverlay(event) {
+function closePopupProfileEditOverlay(event) {
     if (event.target !== event.currentTarget) {
         return;
     } else {
-        popupCloseProfileEdit();
+      closePopup(popupEditProfile);
     }
 };
 
-function handleFormSubmit(event) {
+function handlePopupAddFormSubmit(event) {
     event.preventDefault(); 
     userName.textContent = userNameInput.value;
     userAbout.textContent = userAboutInput.value;
-    popupCloseProfileEdit();
+    closePopup(popupEditProfile);
 };
 
-function popupOpenAdd() {
-    popupAddElement.classList.add('popup_opened');
-  };
+function openPopup(nameOpenedElement) {
+    nameOpenedElement.classList.add('popup_opened');
+}
 
-function popupCloseAdd() {
-    popupAddElement.classList.remove('popup_opened');
-};
+function closePopup(nameClosedElement) {
+    nameClosedElement.classList.remove('popup_opened');
+}
 
-popupOpenEditProfileElement.addEventListener('click', popupOpenProfileEdit);
-popupCloseElement.addEventListener('click', popupCloseProfileEdit);
-popupElement.addEventListener('click', popupCloseProfileEditOverlay);
-formElement.addEventListener('submit', handleFormSubmit);
+popupOpenEditProfileElement.addEventListener('click', openPopupProfileEdit);
+popupCloseElement.addEventListener('click', () => closePopup(popupEditProfile));
+popupElement.addEventListener('click', closePopupProfileEditOverlay);
+formElement.addEventListener('submit', handlePopupAddFormSubmit);
 
-popupOpenAddElement.addEventListener('click', popupOpenAdd);
+popupOpenAddElement.addEventListener('click', () => openPopup(popupAddElement));
 newElementButton.addEventListener('submit', getAddElement);
-popupCloseAddElement.addEventListener('click', popupCloseAdd);
+popupCloseAddElement.addEventListener('click', () => closePopup(popupAddElement));
+
+popupCloseImage.addEventListener('click', () => closePopup(popupShowElement));
