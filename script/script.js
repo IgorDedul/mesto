@@ -22,7 +22,6 @@ const template = document.querySelector('.element__template').content;
 const list = document.querySelector('.element__list');
 
 const linkImage = document.querySelector('.popup__link-image');
-const altImage = document.querySelector('.popup__link-image');
 const nameImage = document.querySelector('.popup__name-image');
 
 
@@ -42,11 +41,12 @@ function addTemplateCard(initialCards) {
   list.prepend(cardClone);
 };
 
-function getAddElement(event) {
+function handleAddElement(event) {
     event.preventDefault();
     const cardName = placeElement.value;
     const cardLink = urlElement.value;
     addTemplateCard({name: cardName, link: cardLink});
+    event.target.reset();
     closePopup(popupAddElement);
 };
 
@@ -72,8 +72,8 @@ function openPopupShow(event) {
     const nameElement = searchNameElement.querySelector('.element__name');
 
     linkImage.src = img.src;
+    linkImage.alt = img.alt;
     nameImage.textContent = nameElement.textContent;
-    altImage.textContent = nameElement.textContent;
 
     openPopup(popupShowElement);
 }
@@ -117,7 +117,7 @@ popupElement.addEventListener('click', closePopupProfileEditOverlay);
 formElement.addEventListener('submit', handlePopupAddFormSubmit);
 
 popupOpenAddElement.addEventListener('click', () => openPopup(popupAddElement));
-newElementButton.addEventListener('submit', getAddElement);
+newElementButton.addEventListener('submit', handleAddElement);
 popupCloseAddElement.addEventListener('click', () => closePopup(popupAddElement));
 
 popupCloseImage.addEventListener('click', () => closePopup(popupShowElement));
