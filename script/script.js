@@ -88,12 +88,18 @@ function openPopupProfileEdit() {
     writePopupStartedForm();
 };
 
-function closePopupProfileEditOverlay(event) {
-    if (event.target !== event.currentTarget) {
+function closePopupInOverlay() {
+    const popupOpened = document.querySelector('.popup_opened');
+    popupOpened.addEventListener('click', (evt) => { 
+          if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popupOpened);
+          } 
+        })
+    /**if (event.target !== event.currentTarget) {
         return;
     } else {
-      closePopup(popupEditProfile);
-    }
+      closePopup(popupOpened);
+    }**/
 };
 
 function closeKeyEsc(event) {
@@ -113,6 +119,7 @@ function handlePopupAddFormSubmit(event) {
 function openPopup(nameOpenedElement) {
     nameOpenedElement.classList.add('popup_opened');
     document.addEventListener('keydown', closeKeyEsc);
+    closePopupInOverlay();
 }
 
 function closePopup(nameClosedElement) {
@@ -121,7 +128,6 @@ function closePopup(nameClosedElement) {
 
 popupOpenEditProfileElement.addEventListener('click', openPopupProfileEdit);
 popupCloseElement.addEventListener('click', () => closePopup(popupEditProfile));
-popupElement.addEventListener('click', closePopupProfileEditOverlay);
 formElement.addEventListener('submit', handlePopupAddFormSubmit);
 
 popupOpenAddElement.addEventListener('click', () => openPopup(popupAddElement));
