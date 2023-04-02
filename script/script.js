@@ -96,6 +96,13 @@ function closePopupProfileEditOverlay(event) {
     }
 };
 
+function closeKeyEsc(event) {
+    if (event.key === "Escape") {
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
+    }
+  }
+
 function handlePopupAddFormSubmit(event) {
     event.preventDefault(); 
     userName.textContent = userNameInput.value;
@@ -105,6 +112,7 @@ function handlePopupAddFormSubmit(event) {
 
 function openPopup(nameOpenedElement) {
     nameOpenedElement.classList.add('popup_opened');
+    document.addEventListener('keydown', closeKeyEsc);
 }
 
 function closePopup(nameClosedElement) {
