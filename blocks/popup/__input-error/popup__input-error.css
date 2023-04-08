@@ -1,13 +1,12 @@
 .popup__input-error {
-    border-bottom-color: red;
-}
-
-span.popup__input-error {
     color: red;
+    height: 30px;
     font-size: 12px;
-    position: absolute;
     left: 0;
     bottom: 0;
-    transform: translateY(calc(100% + 3px));
-
+    font-weight: 400;
+    line-height: 15px;
+    margin: 5px 0;
 }
+
+    
