@@ -48,11 +48,11 @@ function handleAddElement(event) {
     event.target.reset();
     const formAddButton = popupAddElement.querySelector('.popup__save-button');
     disableButtonAddElement(formAddButton);
+    closePopup(popupAddElement); 
 };
 
 function disableButtonAddElement(button) {
     button.classList.add('popup__save-button_disabled');
-    button.classList.remove('popup__save-button');
     button.removeAttribute('disable', true);
   };
 
@@ -113,7 +113,6 @@ function closeKeyEsc(event) {
     if (event.key === "Escape") {
       const popupOpened = document.querySelector('.popup_opened');
       closePopup(popupOpened);
-      document.removeEventListener('keydown', closeKeyEsc);
     }
   }
 
@@ -131,6 +130,7 @@ function openPopup(nameOpenedElement) {
 
 function closePopup(nameClosedElement) {
     nameClosedElement.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeKeyEsc);
 }
 
 closePopupInButtonOrOverlay();
