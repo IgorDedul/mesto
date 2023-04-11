@@ -53,7 +53,7 @@ function handleAddElement(event) {
 
 function disableButtonAddElement(button) {
     button.classList.add('popup__save-button_disabled');
-    button.removeAttribute('disable', true);
+    button.disabled = true;
   };
 
 function setEventListener(htmlElement) {
@@ -102,11 +102,6 @@ function closePopupInButtonOrOverlay() {
             } 
         })
     })
-    /**if (event.target !== event.currentTarget) {
-        return;
-    } else {
-      closePopup(popupOpened);
-    }**/
 };
 
 function closeKeyEsc(event) {
