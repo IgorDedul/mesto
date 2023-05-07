@@ -1,10 +1,12 @@
 export default class Card {
-    constructor(cardObject, templateElement) {
+    constructor(cardObject, templateElement, handleCardClick) {
         //Основные данные и с теплайт элемента
         this._card = cardObject;
         this._cardName = this._card.name;
         this._cardLink = this._card.link;
         this._cardTemplate = templateElement;
+        //Функция попапа изображения
+        this._handleCardClick = handleCardClick;
     }
 
     //Публичный метод для наполнения карточки  
@@ -33,7 +35,9 @@ export default class Card {
     _setEventListener() {
         this._deleteIcon.addEventListener('click', this._deleteElement);
         this._likeIcon.addEventListener('click', this._toggleLike);
-        this._elementImages.addEventListener('click', this._openPopupShow);
+        this._elementImages.addEventListener('click',  () => {
+            this._handleCardClick(this._cardName, this._cardLink)
+        });
     };
 
     //Удаление элемента
@@ -48,22 +52,5 @@ export default class Card {
         like.classList.toggle('element__like_active');
     };
 
-    //Отображение попапа картинки
-    _openPopupShow(event) {
-        const img = event.target;
-        const searchNameElement = event.target.closest('.element__card');
-        const nameElement = searchNameElement.querySelector('.element__name');
-        const linkImage = document.querySelector('.popup__link-image');
-        const nameImage = document.querySelector('.popup__name-image');
-        const popupShowElement = document.querySelector('.popup_image');
-
-        linkImage.src = img.src;
-        linkImage.alt = img.alt;
-        nameImage.textContent = nameElement.textContent;
-        
-        /**openPopup(popupShowElement); - пока выключен, т.к. нет видимости из модуля функций Index.js**/
-        popupShowElement.classList.add('popup_opened');
-
-    }
     
 }

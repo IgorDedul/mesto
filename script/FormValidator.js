@@ -7,28 +7,32 @@ export default class FormValidator {
     this._submitButtonDisactive = validationConfig.submitButtonDisactive;
     this._inputErrorLine = validationConfig.inputErrorLine;
     this._validationObject = validationObject;
+    this._validationSettings = validationConfig;
+
+    //Массив форм проверки валидации для очистки от ошибок
+    this._inputList = Array.from(this._validationObject.querySelectorAll(this._inputSelector));
+    this._formButton = this._validationObject.querySelector(this._submitButtonSelector);
   }
 
-  //Публичный метод включения валидации заданной формы
+  //Публичный метод включения валидации форм
   enableValidation() {
     this._setEventListeners();
   }
 
   //Слушатель валидации
   _setEventListeners() {
-    const formInputSelector = Array.from(this._validationObject.querySelectorAll(this._inputSelector));
-    const formButton = this._validationObject.querySelector(this._submitButtonSelector);
-    this._disableButton(formButton);
-    formInputSelector.forEach(input => {
+    this._toggleButtonState();
+    this._inputList.forEach(input => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        if (this._hasInvalidInput(formInputSelector)) {
-          this._disableButton(formButton);
-        } else {
-          this._enableButton(formButton);    
-        };
+        this._toggleButtonState();
       })
     });
+  }
+
+  resetValidation() {
+    this._inputList.forEach((inputItem) => { this._checkInputValidity(inputItem); })
+    this._toggleButtonState();
   }
 
   //Проверка ввода и подключение строки об ошибке
@@ -45,25 +49,31 @@ export default class FormValidator {
   }
 
   //Проверка валидности браузерным методом
-  _hasInvalidInput(formInputSelector) {
-    return formInputSelector.some(item => !item.validity.valid);
+  _hasInvalidInput() {
+    return this._inputList.some(item => !item.validity.valid);
   };
 
-  //Проверка валидности браузерным методом
-  _hasInvalidInput(formInputSelector) {
-    return formInputSelector.some(item => !item.validity.valid);
-  };
+  // Метод изменения состояния кнопки после валидации
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      // Отключаем кнопку при ошибке валидации
+      this._disableButton();
+    } else {
+      // Включаем кнопку
+      this._enableButton();
+    }
+  }
 
   //Кнопка принять активна
-  _enableButton(button) {
-    button.classList.remove(this._submitButtonDisactive);
-    button.disabled = false;
+  _enableButton() {
+    this._formButton.classList.remove(this._submitButtonDisactive);
+    this._formButton.disabled = false;
   };
 
   //Кнопка принять деактивирована
-  _disableButton(button) {
-    button.classList.add(this._submitButtonDisactive);
-    button.disabled = true;
+  _disableButton() {
+    this._formButton.classList.add(this._submitButtonDisactive);
+    this._formButton.disabled = true;
   };
 
 }
