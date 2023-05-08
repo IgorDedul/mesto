@@ -67,6 +67,7 @@ function handleAddElement(event) {
     const addCard = {name: cardName, link: cardLink};
     renderCard(addCard);
     event.target.reset();
+    popupAddElementFormValidator.resetValidation();
     closePopup(popupAddElement); 
 };
 
@@ -129,23 +130,18 @@ function closePopup(nameClosedElement) {
     document.removeEventListener('keydown', closeKeyEsc);
 }
 
-//Подключение слушателя валидации на разные формы
-function checkFormValidation () {
-    const formsSelector = Array.from(document.querySelectorAll(validationConfig.formSelector));
-    formsSelector.forEach(form => {
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-      })
-      const resetFormValidator = new FormValidator (validationConfig, form);
-      resetFormValidator.resetValidation();
-      const newFormValidator = new FormValidator (validationConfig, form);
-      newFormValidator.enableValidation();
-    })
-}
+//Включение валидации для каждой из форм отдельно
+    //Валидация формы профиля
+    const popupEditProfileFormValidator = new FormValidator (validationConfig, popupEditProfile);
+    popupEditProfileFormValidator.resetValidation();
+    popupEditProfileFormValidator.enableValidation();
+    //Валидация формы добавления нового элемента
+    const popupAddElementFormValidator = new FormValidator (validationConfig, popupAddElement);
+    popupAddElementFormValidator.resetValidation();
+    popupAddElementFormValidator.enableValidation();
 
 
 //Тело запуска функций
-checkFormValidation();
 closePopupInButtonOrOverlay();
 popupOpenEditProfileElement.addEventListener('click', openPopupProfileEdit);
 profileForm.addEventListener('submit', handlePopupAddFormSubmit);
