@@ -2,10 +2,12 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import {initialCards} from './initialCards.js'
 
+//Константы на открытие попапов
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddElement = document.querySelector('.popup_add-element');
 
+//Константы кнопок открытия попапов
 const popupOpenEditProfileElement = document.querySelector('.profile__edit-button');
 const popupOpenAddElement = document.querySelector('.profile__add-button');
 
