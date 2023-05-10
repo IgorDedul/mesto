@@ -1,6 +1,7 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import {initialCards} from '../components/initialCards.js'
+import Section from '../components/Section.js'
 
 //Константы на открытие попапов
 const popups = document.querySelectorAll('.popup');
@@ -25,6 +26,7 @@ const newElementButton = document.querySelector('.popup__element-list');
 
 //Константы для темплейт элементов новых карт
 const templateSelector = '.element__template';
+const listSelector = '.element__list';
 const list = document.querySelector('.element__list');
 
 // Константы классов необходимые для открытия картинки
@@ -43,23 +45,15 @@ const validationConfig = {
   };
 
 
-//наполнение карточками по умолчанию
-initialCards.forEach((elementCard) => {
-    renderCard(elementCard);
-});
-
-//Метод предоставления карт  
-function renderCard(item) {
-    const compliteCard = createdCard(item);
-    list.prepend(compliteCard);
-} 
-
-//Функция создания карты с установленными обработчиками
-function createdCard(item) {
-    const card = new Card (item, templateSelector, handleCardClick);
-    const newElementCard = card.createCard();
-    return newElementCard;
-}
+//Запуск Section отрисовки карт
+const cardList = new Section ({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card (item, templateSelector, handleCardClick);
+        return card.createCard();
+    },
+}, listSelector);
+cardList.render();
 
 //Добавление нового элемента
 function handleAddElement(event) {
@@ -67,7 +61,7 @@ function handleAddElement(event) {
     const cardName = placeElement.value;
     const cardLink = urlElement.value;
     const addCard = {name: cardName, link: cardLink};
-    renderCard(addCard);
+    cardList.addItem(addCard);
     event.target.reset();
     popupAddElementFormValidator.resetValidation();
     closePopup(popupAddElement); 
