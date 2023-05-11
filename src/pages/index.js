@@ -27,7 +27,6 @@ const newElementButton = document.querySelector('.popup__element-list');
 //Константы для темплейт элементов новых карт
 const templateSelector = '.element__template';
 const listSelector = '.element__list';
-const list = document.querySelector('.element__list');
 
 // Константы классов необходимые для открытия картинки
 const linkImage = document.querySelector('.popup__link-image');
@@ -61,7 +60,7 @@ function handleAddElement(event) {
     const cardName = placeElement.value;
     const cardLink = urlElement.value;
     const addCard = {name: cardName, link: cardLink};
-    cardList.addItem(addCard);
+    cardList.addItem(addCard); /**Использует функцию Section **/
     event.target.reset();
     popupAddElementFormValidator.resetValidation();
     closePopup(popupAddElement); 
@@ -79,6 +78,7 @@ function openPopupProfileEdit() {
     fillProfileInputs();
 };
 
+/**
 //Закрытие попапа по клику на оверлей или кнопку закрыть
 function closePopupInButtonOrOverlay() {
     popups.forEach((popup) => {
@@ -97,6 +97,7 @@ function closeKeyEsc(event) {
       closePopup(popupOpened);
     }
   }
+**/
 
 //Обработка формы заполнения профиля
 function handlePopupAddFormSubmit(event) {
@@ -114,6 +115,7 @@ function handleCardClick(name, link) {
     openPopup(popupShowElement);
 }
 
+/**
 //Открытие попапа
 function openPopup(nameOpenedElement) {
     nameOpenedElement.classList.add('popup_opened');
@@ -125,6 +127,7 @@ function closePopup(nameClosedElement) {
     nameClosedElement.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeKeyEsc);
 }
+**/
 
 //Включение валидации для каждой из форм отдельно
     //Валидация формы профиля
