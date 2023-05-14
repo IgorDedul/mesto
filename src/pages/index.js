@@ -6,6 +6,9 @@ import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+// Импорт стилей
+import './index.css';
+
 //Константы на открытие попапов
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');

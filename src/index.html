@@ -7,18 +7,18 @@
     <meta name="description" content="Яндекс Практикум. Проектная работа спринта №4-5. Mesto.">
     <meta name="author" content="Дедуль Игорь">
     <meta name="keywords" content="Яндекс Практикум, проектная работа, спринт №4-5, Mesto, html, css, адаптивная верстка, БЭМ, JavaScript, DOM">
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
     <title>Mesto</title>
 </head>
 <body class="root">
    <div class="page">
         <header class="header">
-            <img src="./images/header-logo.svg" alt="Логотип - надпись Mesto" class="header__logo">
+            <img src="<%=require('./images/header-logo.svg')%>" alt="Логотип - надпись Mesto" class="header__logo">
         </header>
         <main>
             <section class="profile">
               <div class="profile__container">
-                <img src="./images/profile-avatar.jpg" alt="Фото-аватар" class="profile__avatar">
+                <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Фото-аватар" class="profile__avatar">
                 <div class="profile__describe">
                   <div class="profile__title-wrapper">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -96,10 +96,6 @@
       </div>
     </div>
   </section>
-  <script type="module" src="./components/initialCards.js"></script>
-  <script type="module" src="./pages/index.js"></script>
-  <script type="module" src="./components/Card.js"></script>
-  <script type="module" src="./components/FormValidator.js"></script>
-  <script type="module" src="./components/Section.js"></script>
+  <!-- <script type="module" src="./pages/index.js"></script> -->
 </body>
 </html>
