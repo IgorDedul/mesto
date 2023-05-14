@@ -1,18 +1,27 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import {initialCards} from '../components/initialCards.js'
-import Section from '../components/Section.js'
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 //Константы на открытие попапов
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddElement = document.querySelector('.popup_add-element');
 
+//Константы селекторов попапов
+const selectorPopupEditProfile = '.popup_edit-profile';
+const selectorPopupAddElement = '.popup_add-element';
+
 //Константы кнопок открытия попапов
 const popupOpenEditProfileElement = document.querySelector('.profile__edit-button');
 const popupOpenAddElement = document.querySelector('.profile__add-button');
 
 //Константы попапа профиля
+const selectorUserName = '.profile__title';
+const selectorUserAbout = '.profile__subtitle';
 const userName = document.querySelector('.profile__title');
 const userAbout = document.querySelector('.profile__subtitle');
 const userNameInput = document.querySelector('.popup__name-input');
@@ -32,6 +41,7 @@ const listSelector = '.element__list';
 const linkImage = document.querySelector('.popup__link-image');
 const nameImage = document.querySelector('.popup__name-image');
 const popupShowElement = document.querySelector('.popup_image');
+const selectorShowElement = '.popup_image';
 
 
 const validationConfig = {
@@ -55,56 +65,37 @@ const cardList = new Section ({
 cardList.render();
 
 //Добавление нового элемента
-function handleAddElement(event) {
-    event.preventDefault();
+function handleAddElement() {
     const cardName = placeElement.value;
     const cardLink = urlElement.value;
     const addCard = {name: cardName, link: cardLink};
     cardList.addItem(addCard); /**Использует функцию Section **/
-    event.target.reset();
     popupAddElementFormValidator.resetValidation();
-    closePopup(popupAddElement); 
 };
 
 //Заполнение данных профиля
-function fillProfileInputs() {
-    userNameInput.value = userName.textContent;
-    userAboutInput.value = userAbout.textContent;
+function fillProfileInputs(selectorUserName, selectorUserAbout) {
+    const profileInfo = new UserInfo(selectorUserName, selectorUserAbout);
+    profileInfo.setUserInfo(userNameInput, userAboutInput);
 };
-
-//Открытие попапа редактирования профиля
-function openPopupProfileEdit() {
-    openPopup(popupEditProfile);
-    fillProfileInputs();
-};
-
-/**
-//Закрытие попапа по клику на оверлей или кнопку закрыть
-function closePopupInButtonOrOverlay() {
-    popups.forEach((popup) => {
-        popup.addEventListener('mousedown', (evt) => { 
-            if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
-                closePopup(popup);
-            } 
-        })
-    })
-};
-
-//Закрытие попапа клавишей Esc
-function closeKeyEsc(event) {
-    if (event.key === "Escape") {
-      const popupOpened = document.querySelector('.popup_opened');
-      closePopup(popupOpened);
-    }
-  }
-**/
 
 //Обработка формы заполнения профиля
-function handlePopupAddFormSubmit(event) {
-    event.preventDefault(); 
+function handlePopupAddFormSubmit() {
     userName.textContent = userNameInput.value;
     userAbout.textContent = userAboutInput.value;
-    closePopup(popupEditProfile);
+};
+
+//Открытие попапа
+function openPopup(selectorPopup) {
+    const popupActive = new Popup (selectorPopup);
+    popupActive.open();
+    popupActive.setEventListeners();
+};
+
+//Включение класса PopupWithForm для обработки кнопок
+function openPopupForm(selectorPopup, callbackFormSubmit) {
+    const popupActiveForm = new PopupWithForm (selectorPopup, callbackFormSubmit);
+    popupActiveForm.setEventListeners();
 };
 
 //Обработчик открытия попапа изображения
@@ -112,22 +103,8 @@ function handleCardClick(name, link) {
     linkImage.src = link;
     linkImage.alt = name;
     nameImage.textContent = name;
-    openPopup(popupShowElement);
+    openPopup(selectorShowElement);
 }
-
-/**
-//Открытие попапа
-function openPopup(nameOpenedElement) {
-    nameOpenedElement.classList.add('popup_opened');
-    document.addEventListener('keydown', closeKeyEsc);
-}
-
-//Закрытие попапа
-function closePopup(nameClosedElement) {
-    nameClosedElement.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeKeyEsc);
-}
-**/
 
 //Включение валидации для каждой из форм отдельно
     //Валидация формы профиля
@@ -140,10 +117,16 @@ function closePopup(nameClosedElement) {
     popupAddElementFormValidator.enableValidation();
 
 
-//Тело запуска функций
-closePopupInButtonOrOverlay();
-popupOpenEditProfileElement.addEventListener('click', openPopupProfileEdit);
-profileForm.addEventListener('submit', handlePopupAddFormSubmit);
+//Запуск попапов
+popupOpenEditProfileElement.addEventListener('click', () => {
+    openPopup(selectorPopupEditProfile);
+    //Заполнение данных профиля
+    fillProfileInputs(selectorUserName, selectorUserAbout);
+    openPopupForm(selectorPopupEditProfile, handlePopupAddFormSubmit);
+});
 
-popupOpenAddElement.addEventListener('click', () => openPopup(popupAddElement));
-newElementButton.addEventListener('submit', handleAddElement);
+
+popupOpenAddElement.addEventListener('click', () => {
+    openPopup(selectorPopupAddElement)
+    openPopupForm(selectorPopupAddElement, handleAddElement);
+});

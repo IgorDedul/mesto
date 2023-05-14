@@ -1,15 +1,12 @@
-import { Popup } from './Popup.js';
+import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
   // Принимает в конструктор селектор popup и callback сабмита формы
-  constructor(selectorPopup, { callbackFormSubmit }) {
+  constructor(selectorPopup, callbackFormSubmit) {
     super(selectorPopup);
     this._callbackFormSubmit = callbackFormSubmit;
-    /** this_.selectorPopup находится в родительском классе**/
-    this._popupFormItem = this_.selectorPopup.querySelector('.popup__input-list');
+    this._popupFormItem = this._selectorPopup.querySelector('.popup__input-list');
     this._inputList = Array.from(this._popupFormItem.querySelectorAll('.popup__input'));
-    this._sendButton = this_.selectorPopup.querySelector('.popup__save-button');
-    this._sendButtonText = this._sendButton.textContent;
   }
   // Метод собирает данные всех полей формы
   _getInputValues() {
@@ -28,6 +25,7 @@ export default class PopupWithForm extends Popup {
     this._popupFormItem.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._callbackFormSubmit(this._getInputValues());
+      this.close();
     });
   }
 
