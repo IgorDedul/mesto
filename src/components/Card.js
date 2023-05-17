@@ -7,6 +7,9 @@ export default class Card {
         this._cardTemplate = templateElement;
         //Функция попапа изображения
         this._handleCardClick = handleCardClick;
+        //Привязка функций для защиты от потери контента
+        this._deleteElement = this._deleteElement.bind(this);
+        this._toggleLike = this._toggleLike.bind(this);
     }
 
     //Публичный метод для наполнения карточки  
@@ -41,16 +44,14 @@ export default class Card {
     };
 
     //Удаление элемента
-    _deleteElement(event) {
-        const delElement = event.target.closest('.element__item');
-        delElement.remove();
+    _deleteElement() {
+        this._cardElement.remove();
+        this._cardElement = null;
     };
 
     //Измение состояние лайка
-    _toggleLike(event) {
-        const like = event.target;
-        like.classList.toggle('element__like_active');
+    _toggleLike() {
+        this._likeIcon.classList.toggle('element__like_active');
     };
 
-    
 }

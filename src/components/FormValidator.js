@@ -30,21 +30,38 @@ export default class FormValidator {
     });
   }
 
+  // Метод сброса ошибок
+  _hideValidationError(inputItem) {
+    const errorItem = this._validationObject.querySelector(`#${inputItem.id}-error`);
+    const formLineInput = this._validationObject.querySelector(`#${inputItem.id}`);
+    // Очищаем ошибки
+    errorItem.textContent = '';
+    //Убираем красную линию
+    formLineInput.classList.remove(this._inputErrorLine);
+  }
+
+  // Метод отображения ошибок
+  _showValidationError(inputItem) {
+    const errorItem = this._validationObject.querySelector(`#${inputItem.id}-error`);
+    const formLineInput = this._validationObject.querySelector(`#${inputItem.id}`);
+    //Указываем ошибку
+    errorItem.textContent = inputItem.validationMessage;
+    //Подчеркиваем линию
+    formLineInput.classList.add(this._inputErrorLine);
+  }
+
   resetValidation() {
-    this._inputList.forEach((inputItem) => { this._checkInputValidity(inputItem); })
+    this._inputList.forEach((inputItem) => {
+      this._hideValidationError(inputItem); })
     this._toggleButtonState();
   }
 
-  //Проверка ввода и подключение строки об ошибке
+  //Проверка ввода и включения функции отображения и скрытия ошибки
   _checkInputValidity(input) {
-    const currentInputError = document.querySelector(`#${input.id}-error`)
-    const formLineInput = document.querySelector(`#${input.id}`);
     if (input.checkValidity()) {
-      currentInputError.textContent = '';
-      formLineInput.classList.remove(this._inputErrorLine);
+      this._hideValidationError(input);
     } else {
-      currentInputError.textContent = input.validationMessage;
-      formLineInput.classList.add(this._inputErrorLine);
+      this._showValidationError(input);
     };
   }
 

@@ -5,7 +5,7 @@ export default class PopupWithForm extends Popup {
   constructor(selectorPopup, callbackFormSubmit) {
     super(selectorPopup);
     this._callbackFormSubmit = callbackFormSubmit;
-    this._popupFormItem = this._selectorPopup.querySelector('.popup__input-list');
+    this._popupFormItem = this._elementPopup.querySelector('.popup__input-list');
     this._inputList = Array.from(this._popupFormItem.querySelectorAll('.popup__input'));
   }
   // Метод собирает данные всех полей формы
