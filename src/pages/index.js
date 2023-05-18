@@ -72,15 +72,10 @@ function createNewCard(item) {
     return card.createCard();
 }
 
-//Добавление нового элемента
-function handleAddElement() {
-    const newAddElementCard = popupOpenedAddElement._getInputValues();
-
-    const cardName = newAddElementCard.name;
-    const cardLink = newAddElementCard.link;
-    const addCard = {name: cardName, link: cardLink};
-    cardList.addItem(addCard); /**Использует функцию Section **/
-    popupAddElementFormValidator._disableButton();
+//Добавление нового элемента (объект objectCard создаётся в PopupWithForm - _getInputValues)
+function handleAddElement(objectCard) {
+    cardList.addItem(objectCard); /**Использует функцию Section **/
+    popupAddElementFormValidator.resetValidation();
 };
 
 //Заполнение данных профиля
@@ -88,11 +83,10 @@ function fillProfileInputs() {
    profileInfo.setUserInfo(userNameInput, userAboutInput);
 };
 
-//Обработка формы заполнения профиля
-function handlePopupAddFormSubmit() {
-    const userInfo = popupOpenedEditProfile._getInputValues();
-    userName.textContent = userInfo.userName;
-    userAbout.textContent = userInfo.userAbout;
+//Обработка формы заполнения профиля (объект objectCard создаётся в PopupWithForm - _getInputValues)
+function handlePopupAddFormSubmit(objectCard) {
+    userName.textContent = objectCard.userName;
+    userAbout.textContent = objectCard.userAbout;
 };
 
 //Включение класса PopupWithForm для открытия попапа обработки кнопок

@@ -53,7 +53,7 @@ export default class FormValidator {
   resetValidation() {
     this._inputList.forEach((inputItem) => {
       this._hideValidationError(inputItem); })
-    this._toggleButtonState();
+    this._disableButton();
   }
 
   //Проверка ввода и включения функции отображения и скрытия ошибки
