@@ -1,8 +1,9 @@
 export default class UserInfo {
     // Принимает объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
-    constructor(usernameSelector, userDescriptionSelector) {
+    constructor(usernameSelector, userDescriptionSelector, userAvatarSelector) {
       this._username = document.querySelector(usernameSelector);
       this._userDescription = document.querySelector(userDescriptionSelector);
+      this._avatarLink = document.querySelector(userAvatarSelector);
     }
     // Метод возвращает объект с данными пользователя
     getUserInfo() {
@@ -16,4 +17,8 @@ export default class UserInfo {
       username.value = this._username.textContent;
       description.value = this._userDescription.textContent;
     }
+    // Метод изменения аватара пользователя, обновляет ссылку через src на картинку нового аватара
+    setUserAvatar(avatarLink) {
+      this._avatarLink.src = avatarLink;
+  }
   }

@@ -28,6 +28,7 @@ const popupOpenAddElement = document.querySelector('.profile__add-button');
 //Константы попапа профиля
 const selectorUserName = '.profile__title';
 const selectorUserAbout = '.profile__subtitle';
+const selectorUserAvatar = '.profile__avatar';
 const userName = document.querySelector('.profile__title');
 const userAbout = document.querySelector('.profile__subtitle');
 const userNameInput = document.querySelector('.popup__name-input');
@@ -70,7 +71,7 @@ const validationConfig = {
 const apiConnect = new Api(apiAuthorizationData);
 
 //Создание экземпляра класса пользователя
-const profileInfo = new UserInfo(selectorUserName, selectorUserAbout);
+const profileInfo = new UserInfo(selectorUserName, selectorUserAbout, selectorUserAvatar);
 
 //Запуск Section отрисовки карт
 const cardList = new Section ({
