@@ -7,6 +7,9 @@ export default class PopupWithForm extends Popup {
     this._callbackFormSubmit = callbackFormSubmit;
     this._popupFormItem = this._elementPopup.querySelector('.popup__input-list');
     this._inputList = Array.from(this._popupFormItem.querySelectorAll('.popup__input'));
+  //Ниже, константы для замены текста в кнопках в момент отправки данных
+    this._sendButton = this._elementPopup.querySelector('.popup__save-button');
+    this._sendButtonText = this._sendButton.textContent; /**Переменная в которой хранится первоначальный текст кнопки*/
   }
   // Метод собирает данные всех полей формы
   _getInputValues() {
@@ -34,5 +37,14 @@ export default class PopupWithForm extends Popup {
     super.close();
     // Сбрасываем форму
     this._popupFormItem.reset();
+  }
+
+  // Метод изменения в кнопке текста в момент сохранения
+  putSavingProcessText() {
+      this._sendButton.textContent = 'Сохранение...';
+  }
+  // Метод возврата стандартного текста кнопке
+  returnSavingProcessText() {
+      this._sendButton.textContent = this._sendButtonText;
   }
 }
