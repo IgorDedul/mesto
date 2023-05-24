@@ -6,6 +6,7 @@ import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 // Импорт стилей
 import './index.css';
@@ -45,7 +46,16 @@ const listSelector = '.element__list';
 const popupShowElement = document.querySelector('.popup_image');
 const selectorShowElement = '.popup_image';
 
+//Объект с данными для авторизации API
+const apiAuthorizationData = {
+    link: 'https://mesto.nomoreparties.co/v1/cohort-66/',
+    headers: {
+      authorization: '87e7fffd-44f4-496a-a376-493e7b9c6ebf',
+      'Content-Type': 'application/json'
+    }
+  }
 
+//Объект с селекторами для валидации
 const validationConfig = {
     formSelector: '.popup__input-list',
     inputSelector: '.popup__input',
@@ -55,6 +65,8 @@ const validationConfig = {
     inputErrorLine: 'popup__input_line-error'
   };
 
+//Создание экземпляра класса Api
+const apiConnect = new Api(apiAuthorizationData);
 
 //Создание экземпляра класса пользователя
 const profileInfo = new UserInfo(selectorUserName, selectorUserAbout);
