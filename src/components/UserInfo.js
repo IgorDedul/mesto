@@ -13,9 +13,9 @@ export default class UserInfo {
       };
     }
     // Метод принимает новые данные пользователя и добавляет их на страницу
-    setUserInfo(username, description) {
-      username.value = this._username.textContent;
-      description.value = this._userDescription.textContent;
+    setUserInfo({username, description}) {
+      this._username.textContent = username ;
+      this._userDescription.textContent = description;
     }
     // Метод изменения аватара пользователя, обновляет ссылку через src на картинку нового аватара
     setUserAvatar(avatarLink) {

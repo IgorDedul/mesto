@@ -46,10 +46,11 @@ export default class Api {
     }
     // Метод отправки данных пользователя на сервер
     sendUserData(profileData) {
+      console.log (profileData);
       return fetch(`${this._link}users/me`, {
         headers: this._headers,
         method: 'PATCH',
-        body: JSON.stringify({ name: profileData.username, about: profileData.description })
+        body: JSON.stringify({  name: profileData.userName, about: profileData.userAbout  })
       })
         .then(res => { return this._processingServerResponse(res); })
     }

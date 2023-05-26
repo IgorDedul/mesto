@@ -19,7 +19,7 @@
             <section class="profile">
               <div class="profile__container">
                 <div class="profile__container-avatar">
-                  <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Фото-аватар" class="profile__avatar">
+                  <img src="#" alt="Фото-аватар" class="profile__avatar">
                   <button class="profile__avatar-edit" type="button" aria-label="Редактировать аватар"></button>
                 </div>
                 <div class="profile__describe">
@@ -116,10 +116,10 @@
       <button class="popup__close-button popup__close-avatar" type="button" aria-label="Закрыть"></button>
       <h3 class="popup__title">Обновить аватар</h3>
       <form class="popup__input-list popup__element-avatar" name="popup-user-avatar" novalidate>
-        <label class="popup__field" for="avatar-input">
+        <label class="popup__field">
           <input id="avatar-input" type="url" class="popup__input popup__url-input-avatar"
                  name="avatar" required placeholder="Cсылка на аватар" minlength="2" maxlength="200">
-          <span class="popup__input-error" id="avatar-url-input-error"></span>
+          <span class="popup__input-error" id="avatar-input-error"></span>
         </label>
         <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>

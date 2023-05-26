@@ -15,10 +15,6 @@ export default class Card {
         this._cardDelete = handleActions.handleCardDelete;
         this._putLike = handleActions.handleCardLike;
         this._removeLike = handleActions.handleCardDeleteLike;
-        
-        //Привязка функций для защиты от потери контента
-        this._deleteElement = this._deleteElement.bind(this);
-        this._toggleLike = this._toggleLike.bind(this);
     }
 
     //Публичный метод для наполнения карточки  
@@ -84,8 +80,9 @@ export default class Card {
     }
     // Метод проверки наличия лайка на карточке
     _likedCard() {
-        // Возврат без переменной, так как объявление переменной будет избыточной (Local variable is redundant)
-        return this._likeArea.find((userLike) => userLike._id === this._userId);
+        // Возврат без переменной
+        console.log(this._likeArea);
+        return this._likeArea.some(like => { like._id === this._userId });
     }
 
     // Метод обработки добавления и снятия лайков

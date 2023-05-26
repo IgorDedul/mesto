@@ -3,7 +3,7 @@ import Popup from './Popup.js';
 
 export default class PopupWithSubmit extends Popup {
   // Получает селектор, объект и карточку.
-  constructor(popupSelector, callbackSubmit) {
+  constructor(popupSelector, { callbackSubmit } ) {
     super(popupSelector);
     // this._elementPopup находится в родительском классе
     this._submitButton = this._elementPopup.querySelector('.popup__input-list');
