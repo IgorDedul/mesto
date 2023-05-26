@@ -15,6 +15,9 @@ export default class Card {
         this._cardDelete = handleActions.handleCardDelete;
         this._putLike = handleActions.handleCardLike;
         this._removeLike = handleActions.handleCardDeleteLike;
+        //Привязка функций для защиты от потери контента
+        this._likedCard = this._likedCard.bind(this);
+        this._interactLike = this._interactLike.bind(this);
     }
 
     //Публичный метод для наполнения карточки  
@@ -44,7 +47,7 @@ export default class Card {
 
     //Добавление слушателей кликов  
     _setEventListener() {
-        this._likeIcon.addEventListener('click', this._likedCard);
+        this._likeIcon.addEventListener('click', this._interactLike);
         this._elementImages.addEventListener('click',  () => {
                     this._cardZoom(this._cardName, this._cardLink)
         });
@@ -81,16 +84,15 @@ export default class Card {
     // Метод проверки наличия лайка на карточке
     _likedCard() {
         // Возврат без переменной
-        console.log(this._likeArea);
-        return this._likeArea.some(like => { like._id === this._userId });
+        return this._likeArea.find((like) => like._id === this._userId);
     }
 
     // Метод обработки добавления и снятия лайков
     _interactLike() {
         if (this._likedCard()) {
-        this._removeLike(this._cardId);
+            this._removeLike(this._cardId);
         } else {
-        this._putLike(this._cardId);
+            this._putLike(this._cardId);
         }
     }
 }
