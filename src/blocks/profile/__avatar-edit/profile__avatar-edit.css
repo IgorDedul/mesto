@@ -1,12 +1,12 @@
 .profile__avatar-edit {
-    position: absolute;    
+    position: absolute;
     margin: 0;
     padding: 0;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background: none;
-    border: none;  
+    border: none;
   }
   
   .profile__avatar-edit:hover {
